@@ -1,11 +1,14 @@
 import turtle
 import pandas
+from name_printer import NamePrinter
 
 screen = turtle.Screen()
 screen.title("U.S.States Game")
 image = "blank_states_img.gif"
 screen.addshape(image)
 turtle.shape(image)
+
+state_name_printer = NamePrinter()
 
 data = pandas.read_csv("50_states.csv")
 states = data.state
@@ -25,5 +28,8 @@ while game_is_on:
         if answer_state in correct_guesses:
             print(f"You already correctly guessed {answer_state}")
         else:
+            state_row = data[data.state == answer_state]
+            state_cords = (state_row.x.to_numpy()[0], state_row.y.to_numpy()[0])
+            state_name_printer.print_name(answer_state, state_cords)
             correct_guesses.append(answer_state)
             correct_guess_count += 1
