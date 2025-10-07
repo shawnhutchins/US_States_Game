@@ -29,7 +29,7 @@ while game_is_on:
             print(f"You already correctly guessed {answer_state}")
         else:
             state_row = data[data.state == answer_state]
-            state_cords = (state_row.x.to_numpy()[0], state_row.y.to_numpy()[0])
+            state_cords = (state_row.x.item(), state_row.y.item())
             state_name_printer.print_name(answer_state, state_cords)
             correct_guesses.append(answer_state)
             correct_guess_count += 1
