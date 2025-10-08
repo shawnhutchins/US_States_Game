@@ -14,15 +14,15 @@ data = pandas.read_csv("50_states.csv")
 states = data.state
 correct_guesses = []
 
-game_is_on = True
-while game_is_on:
+while len(correct_guesses) < 50:
 
     answer_state = (screen.textinput(
         title=f"{len(correct_guesses)}/50 States Correct",
         prompt="What's another state's name?")
         .title())
-    print(answer_state)
 
+    if answer_state == "Exit":
+        break
     if answer_state in states.values:
         if answer_state in correct_guesses:
             print(f"You already correctly guessed {answer_state}")
