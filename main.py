@@ -22,6 +22,10 @@ while len(correct_guesses) < 50:
         .title())
 
     if answer_state == "Exit":
+        states_set = set(states)
+        correct_guesses_set = set(correct_guesses)
+        missed_states = list(states_set - correct_guesses_set)
+        pandas.DataFrame(missed_states).to_csv("missed_states.csv")
         break
     if answer_state in states:
         if answer_state in correct_guesses:
@@ -31,9 +35,3 @@ while len(correct_guesses) < 50:
             state_cords = (state_row.x.item(), state_row.y.item())
             state_name_printer.print_name(answer_state, state_cords)
             correct_guesses.append(answer_state)
-
-if len(correct_guesses) < 50:
-    states_set = set(states)
-    correct_guesses_set = set(correct_guesses)
-    missed_states = list(states_set - correct_guesses_set)
-    pandas.DataFrame(missed_states).to_csv("missed_states.csv")
