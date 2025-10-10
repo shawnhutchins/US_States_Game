@@ -22,9 +22,7 @@ while len(correct_guesses) < 50:
         .title())
 
     if answer_state == "Exit":
-        states_set = set(states)
-        correct_guesses_set = set(correct_guesses)
-        missed_states = list(states_set - correct_guesses_set)
+        missed_states = [state for state in states if state not in correct_guesses]
         pandas.DataFrame(missed_states).to_csv("missed_states.csv")
         break
     if answer_state in states:
